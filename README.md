@@ -148,7 +148,7 @@ sudo systemctl status kibana
 
 
 
-## 🛠️ 3. ElasticSearch 7.16.3 버전 선택 이유
+## ❓ 3. ElasticSearch 7.16.3 버전 선택 이유
 <br>
 
   | **항목**            | **8.x 버전**                                      | **7.x 버전**                                      |
@@ -165,3 +165,19 @@ sudo systemctl status kibana
 - 새로운 REST API 기능, 쿼리 성능 향상, 일부 새로운 플러그인 기능 등이 추가되어 실습 시 더욱 효율적으로 작업 가능
 -  7.16.3은 7.x 시리즈에서 커뮤니티의 활발한 지원을 받는 마지막 주요 버전 
 -  **7.16.3 버전은 보안 패치와 버그 수정이 완료되어 안정적이며, 최신 기능도 갖추고 있어 학습용으로 적합하면서도 시스템에 부담을 덜 수 있는 버전**
+
+## 🚨 4. 트러블슈팅
+- 하나의 VM을 복제하여 3개의 VM을 구성하는 과정에서 **MAC 주소 정책**을 *NAT 네트워크 어댑터 MAC 주소만 포함*으로 복제하여 원본 가상 머신의 MAC 주소를 그대로 물려 받아 충돌 발생
+  - 설정 > 네트워크 > 새로운 MAC 주소 할당하여 해결
+
+- 처음 복제 시에  **MAC 주소 정책**을 *모든 네트워크 어댑터의 새 MAC 주소 생성*으로 설정하여 새로운 MAC 주소 할당 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/1fec032f-5ddb-4005-9286-8a45118a73fd" alt="Image" width="500" />
+</div>
+
+<br>
+
+- 또한 복제 시에는 원본과 같은 hostname을 사용하고 있기 때문에 수정 필요
+```bash
+sudo hostnamectl set-hostname <hostname>
+```
