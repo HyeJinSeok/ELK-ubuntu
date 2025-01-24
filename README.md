@@ -170,7 +170,7 @@ sudo systemctl status kibana
 - 하나의 VM을 복제하여 3개의 VM을 구성하는 과정에서 **MAC 주소 정책**을 *NAT 네트워크 어댑터 MAC 주소만 포함*으로 복제하여 원본 가상 머신의 MAC 주소를 그대로 물려 받아 충돌 발생
   - 설정 > 네트워크 > 새로운 MAC 주소 할당하여 해결
 
-- 처음 복제 시에  **MAC 주소 정책**을 *모든 네트워크 어댑터의 새 MAC 주소 생성*으로 설정하여 새로운 MAC 주소 할당 
+- 위와 같은 오류 없이 수행하기 위해서는 처음 복제 시에  **MAC 주소 정책**을 *모든 네트워크 어댑터의 새 MAC 주소 생성*으로 설정하여 새로운 MAC 주소 할당 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/1fec032f-5ddb-4005-9286-8a45118a73fd" alt="Image" width="500" />
 </div>
