@@ -8,9 +8,50 @@ Ubuntu 기반 VirtualBox 가상머신 환경에서 Elasticsearch, Logstash, Kiba
 
 <br>
 
+## 0. 설정 파일 개념정리
+
+ELK 스택을 설치하면 여러 개의 설정 파일을 다루게 된다. 
+
+대표적으로는 **.yml**(YAML 포맷)과 **.conf**(Logstash용 파이프라인 설정 파일)가 있다.
+
+### ① .yml 파일 (YAML 설정 파일)
+
+• 대상: elasticsearch.yml, logstash.yml, kibana.yml
+
+• 목적: 서비스 자체의 **전역 설정**을 정의
+
+&thinsp; \- 네트워크 접근 범위( network.host ) <br> &thinsp; \- 포트( http.port ) <br> &thinsp; \- 클러스터 모드( discovery.type )
+
+
+• 특징: 들여쓰기 기반 구조 (JSON보다 사람이 읽고 쓰기 편리함)
+
+• 주의사항: 탭(tab) 대신 <strong>공백(space)</strong>을 써야함 (YAML 문법 오류 방지)
+
+※ 잘못된 값 입력 시, 서비스 시작 자체가 실패할 수 있음
+
+※ 수정 후에는 항상 <strong>systemctl restart <서비스명></strong>으로 재시작하고 필요함
+
+<br>
+
+### ② .conf 파일
+
+• 대상: Logstash **(/etc/logstash/conf.d/*.conf)**
+
+• 목적: Logstash의 데이터 흐름(파이프라인)을 정의, 크게 **input → filter → output** 구조
+
+&thinsp; \- Input: 데이터가 어디서 들어오는지 (예: Filebeat, syslog, csv 파일) <br> &thinsp; \- Filter: 들어온 데이터를 가공하는 단계 (예: grok 패턴, mutate, json 파싱) <br> &thinsp; \- Output: 어디로 내보낼지 (예: Elasticsearch, 콘솔)
+
+• 특징: conf 파일은 여러 개를 동시에 둘 수 있음, Logstash가 전부 읽어 실행
+
+※ 문법 오류가 있으면 Logstash 서비스가 실행되지 않음
+
+※ **sudo systemctl status logstash**나 로그 확인 필수
+
+<br>
+
 ## 1. 전체 아키텍처 
 
-Ubuntu 20.04 LTS VM 3대를 활용하여 ELK 스택을 구축함
+Ubuntu 20.04 LTS **VM 3대**를 활용하여 ELK 스택을 구축함
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/55e91cc3-c835-4766-b049-9517706c432f" alt="Architecture Diagram">
@@ -53,7 +94,7 @@ sudo apt install -y openjdk-11-jdk
 
 <br>
 
-### ✅ Elasticsearch 7.16.3 설치 및 설정
+### ✅ Elasticsearch 설치 및 설정
 
 1\. Elasticsearch GPG 키 추가
 
@@ -118,7 +159,7 @@ curl -X GET "http://localhost:9200/"
 
 <br>
 
-### ✅ Logstash 7.16.3 설치 및 설정
+### ✅ Logstash 설치 및 설정
 
 1\. Logstash 패키지 다운로드 및 설치
 
@@ -170,7 +211,7 @@ sudo systemctl status logstash
 ```
 <br>
 
-### ✅ Kibana 7.16.3 설치 및 설정
+### ✅ Kibana 설치 및 설정
 
 1\. Kibana 패키지 다운로드 및 설치
 
