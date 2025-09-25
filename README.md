@@ -14,6 +14,8 @@ ELK 스택을 설치하면 여러 개의 설정 파일을 다루게 된다.
 
 대표적으로는 **.yml**(YAML 포맷)과 **.conf**(Logstash용 파이프라인 설정 파일)가 있다.
 
+<br>
+
 ### ① .yml 파일 (YAML 설정 파일)
 
 • 대상: elasticsearch.yml, logstash.yml, kibana.yml
@@ -53,9 +55,9 @@ ELK 스택을 설치하면 여러 개의 설정 파일을 다루게 된다.
 
 Ubuntu 20.04 LTS **VM 3대**를 활용하여 ELK 스택을 구축함
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/55e91cc3-c835-4766-b049-9517706c432f" alt="Architecture Diagram">
-</p>
+<img src="./images/img01.png" alt="Architecture Diagram" width="900"/>
+
+<br>
 
 ### ① VirtualBox
 
@@ -247,9 +249,7 @@ sudo systemctl status kibana
 
 • Logstash : Data import(index : carddata) 후 index 확인
 
-  <p align="center">
-    <img src="https://github.com/user-attachments/assets/f799b2b2-6c37-4a77-99ae-64531d4f6c49" alt="Architecture Diagram">
-  </p>
+<img src="./images/img02.png" alt="host browser" width="1000"/>
 
 <br>
 
@@ -290,10 +290,10 @@ sudo systemctl status kibana
 
 • VM을 처음 복제할 때는 반드시 **모든 네트워크 어댑터에 대해 새 MAC 주소 생성**을 선택해야 함
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/1fec032f-5ddb-4005-9286-8a45118a73fd" alt="Image" width="500" />
+<img src="./images/img03.png" alt="vm conf" width="600"/>
 </div>
 
+<br>
 
 • 또한 복제 시 hostname(호스트 이름)도 원본과 똑같이 복사되므로 변경이 필요함
 
